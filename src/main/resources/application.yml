@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: fuel-queue
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fuel_queue}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
+server:
+  port: ${SERVER_PORT:8080}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:change-me}
+    expiration: ${JWT_EXPIRATION:3600}
+    issuer: fuel-queue-system
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+  api-docs:
+    path: /api-docs
