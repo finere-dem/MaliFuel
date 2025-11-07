@@ -1,0 +1,12 @@
+target/
+.idea/
+.project
+.classpath
+.settings/
+*.iml
+/.mvn/
+mvnw
+mvnw.cmd
+*.log
+application-local.yml
+.DS_Store

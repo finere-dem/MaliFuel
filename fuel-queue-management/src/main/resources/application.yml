@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: fuel-queue-management
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fuel_queue}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+logging:
+  level:
+    org.springframework.security: INFO
+    com.bamako.fuelqueue: DEBUG
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:change-me}
+    issuer: bamako-fuel-queue
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:120}
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
