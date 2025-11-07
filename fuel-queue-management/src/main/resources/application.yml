@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: fuel-queue-management
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/fuel_queue}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+  jackson:
+    time-zone: UTC
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+security:
+  jwt:
+    issuer: fuel-queue-management
+    secret: ${JWT_SECRET:change-me}
+    expiration: ${JWT_EXPIRATION:3600000} # 1 hour in ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  api-docs:
+    path: /api/docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.bamako.fuelqueue: INFO
+    org.springframework.security: INFO
